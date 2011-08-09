@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=320; user-scalable=no" />
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>NFC Reader Demo</title>
+<link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
+<script type="text/javascript" charset="utf-8" src="phonegap-nfc-0.1.4.js"></script>
+<script type="text/javascript" charset="utf-8">
+var ready = function() {
+
+    function showText(text) {
+        document.getElementById("tagContents").innerHTML = text;
+    }
+
+    navigator.nfc.addTagListener(
+        function(tagEvent) {
+            showText(Ndef.bytesToString(tagEvent.tag.id));
+            console.log(JSON.stringify(tagEvent.tag.techTypes));
+        },
+        function() {
+            console.log("Listening for default tag event");
+        },
+        function() {
+            console.log("Fail");
+        }
+    );
+
+};
+
+document.addEventListener('deviceready', ready, false);
+</script>
+</head>
+
+<body>
+  <h1>PhoneGap NFC Default Tag detection sample</h1>
+  <div id="tagContents">
+  </div>
+</body>
+</html>

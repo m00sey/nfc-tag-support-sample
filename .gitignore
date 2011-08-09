@@ -1,0 +1,6 @@
+*.iml
+bin/
+*.properties
+build.xml
+.idea
+out/
